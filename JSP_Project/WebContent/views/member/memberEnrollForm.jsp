@@ -6,14 +6,6 @@
 <meta charset="UTF-8">
 <title>회원가입 폼</title>
 <style>
-	.outer {
-		background: black;
-		color: white;
-		width: 1000px;
-		margin: auto;
-		margin-top: 50px;
-	}
-	
 	#enroll-form table {
 		margin: auto;
 	}

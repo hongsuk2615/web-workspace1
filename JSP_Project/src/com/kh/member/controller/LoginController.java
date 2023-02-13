@@ -106,9 +106,6 @@ public class LoginController extends HttpServlet {
 			//    localhost:8082/jspproject라는 url로 재요청을 보낸다.
 			response.sendRedirect(request.getContextPath()); // 로그인시에는 redirect 방식이 사용된다.
 		}
-		
-		
-		
 		doGet(request, response);
 	}
 

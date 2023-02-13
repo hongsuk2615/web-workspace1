@@ -15,15 +15,9 @@ public class Member {
 	private Date modifyDate;
 	private String status;
 
-	
-	
-	
-	
 	public Member() {
 		super();
 	}
-
-	
 
 	public Member(int userNo, String userId, String userPwd, String userName, String phone, String email,
 			String address, String interest, Date enrollDate, Date modifyDate, String status) {
@@ -41,12 +35,6 @@ public class Member {
 		this.status = status;
 	}
 
-
-
-
-
-
-
 	public Member(String userId, String userPwd, String userName, String phone, String email, String address,
 			String interest) {
 		super();
@@ -58,8 +46,7 @@ public class Member {
 		this.address = address;
 		this.interest = interest;
 	}
-	
-	
+
 	public Member(String userId, String userName, String phone, String email, String address, String interest) {
 		super();
 		this.userId = userId;
@@ -69,6 +56,7 @@ public class Member {
 		this.address = address;
 		this.interest = interest;
 	}
+
 	public int getUserNo() {
 		return userNo;
 	}
@@ -91,6 +79,14 @@ public class Member {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getUserPwd() {
+		return userPwd;
+	}
+
+	public void setUserPwd(String userPwd) {
+		this.userPwd = userPwd;
 	}
 
 	public String getPhone() {
