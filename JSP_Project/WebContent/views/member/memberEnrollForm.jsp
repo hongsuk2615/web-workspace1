@@ -20,7 +20,7 @@
 	<!-- ../ : 현재 위치로부터 한번 빠져나감(상위 디렉토리로 이동) -->
 	<div class="outer">
 		<br>
-		<h2 alighn="center">회원가입</h2>
+		<h2 align="center">회원가입</h2>
 		<form id="enroll-form" action="<%= contextPath %>/insert.me" method="post">
 			<!-- 아이디, 비밀번호, 이름, 전화번호, 이메일, 주소, 취미 -->
 	            <table>

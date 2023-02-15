@@ -154,7 +154,7 @@
 							<table>
 								<tr>
 									<td>현재 비밀번호</td>
-									<td><input type="password" name = "userPwd" required readonly></td>
+									<td><input type="password" name = "userPwd" required></td>
 								</tr>
 								<tr>
 									<td>변경할 비밀번호</td>
