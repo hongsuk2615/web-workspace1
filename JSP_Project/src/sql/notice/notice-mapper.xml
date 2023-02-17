@@ -58,7 +58,8 @@
 		UPDATE NOTICE
 		   SET NOTICE_TITLE = ?
 		     , NOTICE_CONTENT = ?
-		 WHERE NOTICE_NO = ?			
+		 WHERE NOTICE_NO = ? 
+		   AND STATUS = 'Y'
 	</entry>
 	
 </properties>

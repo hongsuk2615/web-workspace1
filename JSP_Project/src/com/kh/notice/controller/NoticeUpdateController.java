@@ -47,6 +47,7 @@ public class NoticeUpdateController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/list.no");
 		}else {
 			session.setAttribute("alertMsg", "공지사항 수정 실패");		
+			
 			response.sendRedirect(request.getContextPath()+"/list.no");
 		}
 		

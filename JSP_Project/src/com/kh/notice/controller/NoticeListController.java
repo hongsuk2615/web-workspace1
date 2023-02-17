@@ -34,7 +34,7 @@ public class NoticeListController extends HttpServlet {
 		// 1) 공지사항 전체 리스트 조회
 		ArrayList<Notice> list = new NoticeService().selectNoticeList();
 		// SELECT * FROM NOTICE WHERE STATUS = 'Y'
-		System.out.println(list);
+//		System.out.println(list);
 		// 2) 조회결과를 담아서 응답페이지로 포워딩
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/notice/noticeListView.jsp").forward(request, response);		
