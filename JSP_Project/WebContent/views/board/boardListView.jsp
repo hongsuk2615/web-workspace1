@@ -39,7 +39,7 @@
 		<!-- 글등록버트(로그인한 회원만 보이도록) -->
 		<%if (loginUser != null){ %>
 			<div align="right" style="width:850px">
-				<a href="<%=contextPath%>/enrollForm.bo" class="btn btn-secondary">글작성</a>
+				<a href="<%=contextPath%>/insert.bo" class="btn btn-secondary">글작성</a>
 				<br><br>
 			</div>
 		<% } %>
@@ -140,5 +140,14 @@
 			<% } %>
 		</div>
 	</div>
+	<script>
+	$(function(){
+		$(".list-area>tbody>tr").click(function(){
+			let bno = $(this).children().eq(0).text();
+			location.href = "<%= contextPath%>/detail.bo?bno="+bno;
+		})
+	})
+	
+	</script>
 </body>
 </html>
