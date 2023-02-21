@@ -69,9 +69,9 @@
 			 , CHANGE_NAME
 			 , FILE_PATH
 			 , UPLOAD_DATE
-			 , FILE_LEVEL
-			 , STATUS
-	      FROM ATTACHMENT
+			 , NVL(FILE_LEVEL,0) AS FILE_LEVEL
+			 , A.STATUS
+	      FROM ATTACHMENT A
 	      JOIN BOARD B ON (REF_BNO = BOARD_NO)
 	     WHERE BOARD_NO = ?	
 	</entry>

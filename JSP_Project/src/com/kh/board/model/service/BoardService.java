@@ -10,7 +10,6 @@ import com.kh.board.model.vo.Attachment;
 import com.kh.board.model.vo.Board;
 import com.kh.board.model.vo.Category;
 import com.kh.common.model.vo.PageInfo;
-import com.kh.notice.model.dao.NoticeDao;
 
 public class BoardService {
 
@@ -81,10 +80,10 @@ public class BoardService {
 	}
 	public Attachment getAttachment(int bno) {
 		Connection conn = getConnection();
-		Attachment a = new BoardDao().getAttachment(conn, bno);
+		Attachment at = new BoardDao().getAttachment(conn, bno);
 		
 		close(conn);
-		return a;
+		return at;
 	}
 
 }

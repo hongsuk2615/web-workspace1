@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.board.model.vo.Board" %>
+<%@ page import="com.kh.board.model.vo.Board, com.kh.board.model.vo.Attachment" %>
 <!DOCTYPE html>
-<% Board b = (Board)request.getAttribute("b"); %>
+<% Board b = (Board)request.getAttribute("b"); 
+   Attachment at = (Attachment) request.getAttribute("at");
+%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -43,9 +45,14 @@
 		<tr>
 			<th>첨부파일</th>
 			<td colspan="3">
-				첨부파일이 없을경우 : 첨부파일이 없습니다로 표시
-				첨부파일이 있을경우 : 
-				<a download="파일원본명" href="파일이 존재하는 경로">파일원본명</a>
+				
+				<!-- 첨부파일이 없을경우 : 첨부파일이 없습니다로 표시 -->
+				<% if(at == null) {%>
+					첨부파일이 없습니다.
+				<% } else { %>
+				<!-- 첨부파일이 있을경우 :   -->
+				<a download="<%=at.getOriginName() %>" href="<%= at.getFilePath()+at.getChangeName() %>"><%= at.getOriginName() %></a>
+				<% } %>
 			</td>
 		</tr>
 		
@@ -56,10 +63,10 @@
 	<div align="center">
 		<a href="<%=contextPath%>/list.bo?currentPage=1" class="btn btn-secondary btn-sm">목록가기</a>
 		<!-- 로그인한 사용자가 해당 게시글의 작성자인 경우  -->
-		<%-- <% if(loginUser != null && loginUser.getUserId().equals(b.getBoardWriter())){ %>
+	    <% if(loginUser != null && loginUser.getUserId().equals(b.getBoardWriter())){ %>
 			<a href="<%=contextPath %>/updateForm.bo?bno=<%=b.getBoardNo() %>" class="btn btn-warning btn-sm">수정하기</a>
 			<a href="<%=contextPath %>/delete.bo?bno=<%=b.getBoardNo() %>" class="btn btn-danger btn-sm">삭제하기</a>
-		<% } %> --%>
+		<% } %> 
 	</div>
 		<br>
 		<!-- 댓글기능 화면 -->
@@ -73,21 +80,16 @@
 							<td>
 								<textarea id="replayContent" cols="50" rows="3" style="resize:none;"></textarea>
 							</td>
-							
 							<td><button onclick="insertReply();">댓글등록</button></td>
 						</tr>
-					
-					
 					<% } else { %>
 						<tr>
 							<th>댓글작성</th>
 							<td>
 								<textarea id="replayContent" cols="50" rows="3" style="resize:none;" readonly>로그인후 이용가능한 서비스입니다.</textarea>
 							</td>
-							
 							<td><button disabled>댓글등록</button></td>
 						</tr>
-						
 				   <% } %>
 				</thead>
 				<tbody>
@@ -107,17 +109,9 @@
 						<td>2023-02-20</td>
 					</tr>
 				</tbody>
-			
-			
 			</table>
-		
-		
 		</div>
-		
-	
 	</div>
-
-	
 
 </body>
 </html>

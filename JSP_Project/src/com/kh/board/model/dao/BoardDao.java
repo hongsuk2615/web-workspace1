@@ -83,7 +83,6 @@ public class BoardDao {
 				
 				list.add(b);				
 			}
-			System.out.println("실행확인2");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -215,6 +214,9 @@ int result = 0;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		return at;

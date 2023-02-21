@@ -37,7 +37,11 @@ public class BoardDetailController extends HttpServlet {
 		if(result > 0) {
 			Board b = new BoardService().selectBoard(bno);
 			request.setAttribute("b", b);
+			
 			Attachment at = new BoardService().getAttachment(bno);
+//			System.out.println(at);
+			request.setAttribute("at", at);
+			
 			request.getRequestDispatcher("views/board/boardDetailView.jsp").forward(request, response);
 		} else {			// 조회수 증가 실패시 -> 에러페이지로 포워딩
 			request.setAttribute("errorMsg", "게시판 조회 실패");

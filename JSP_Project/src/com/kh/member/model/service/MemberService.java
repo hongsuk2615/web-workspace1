@@ -1,7 +1,6 @@
 package com.kh.member.model.service;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import com.kh.common.JDBCTemplate;
