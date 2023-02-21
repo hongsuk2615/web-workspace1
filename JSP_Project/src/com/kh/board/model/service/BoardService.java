@@ -85,5 +85,26 @@ public class BoardService {
 		close(conn);
 		return at;
 	}
+	public int updateBoard(Board b, Attachment at) {
+		Connection conn = getConnection();
+		int result1 = new BoardDao().updateBoard(conn,b);
+		
+		int result2 = 1;
+		
+		if(at != null && at.getFileNo() != 0) {
+			result2 = new BoardDao().updateAttachment(conn, at);
+		}else if(at !=null && at.getFileNo()==0){
+			result2 = new BoardDao().insertAttachmentModify(conn, at);
+		}
+
+		if (result1*result2 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result1*result2;
+	}
 
 }
