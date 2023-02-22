@@ -36,7 +36,6 @@ public class EncodingFilter implements Filter {
 		// 서블릿이 호출되기 전, 전처리 작업할 코드 작성
 		request.setCharacterEncoding("UTF-8");
 		// doFilter함수 호출시 url가지고 더 작업할 서블릿, 이 있는지 검사
-		System.out.println("인코딩~~~~~@@@!#@!$!");
 		chain.doFilter(request, response);
 	}
 

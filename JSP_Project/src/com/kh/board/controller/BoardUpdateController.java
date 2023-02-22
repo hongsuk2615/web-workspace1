@@ -44,10 +44,10 @@ public class BoardUpdateController extends HttpServlet {
 		// 필요한 데이터를 담아서 boardUpdateForm.jsp로 포워딩
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		Board b = new BoardService().selectBoard(bno);
-		request.setAttribute("b", b);
 		Attachment at = new BoardService().getAttachment(bno);
-		request.setAttribute("at", at);	
 		ArrayList<Category> list = new BoardService().selectCategoryList();
+		request.setAttribute("b", b);
+		request.setAttribute("at", at);	
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/board/boardUpdateForm.jsp").forward(request, response);
 	}
