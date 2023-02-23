@@ -210,7 +210,6 @@ public class BoardDao {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -356,5 +355,89 @@ int result = 0;
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	public ArrayList<Board> selectThumbnailList(Connection conn){
+		ArrayList<Board> list = new ArrayList<Board>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectThumbnailList");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Board b = new Board();
+				b.setBoardNo(rset.getInt("BOARD_NO"));
+				b.setBoardTitle(rset.getString("BOARD_TITLE"));
+				b.setCount(rset.getInt("COUNT"));
+				b.setTitleImg(rset.getString("FILE_PATH")+rset.getString("CHANGE_NAME"));
+				list.add(b);	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	public Board selectThumbnailBoard(Connection conn, int bno) {
+		Board b = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectThumbnailBoard");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				b = new Board();
+				b.setBoardTitle(rset.getString("BOARD_TITLE"));
+				b.setBoardWriter(rset.getString("BOARD_WRITER"));
+				b.setCreateDate(rset.getDate("CREATE_DATE"));
+				b.setBoardContent(rset.getString("BOARD_CONTENT"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return b;
+	}
+	
+	public ArrayList<Attachment> getThumbnailAttachments(Connection conn, int bno){
+		ArrayList<Attachment> list = new ArrayList<Attachment>();
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("getThumbnailAttachments");
+		ResultSet rset = null;
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Attachment at = new Attachment();
+				at.setFileLevel(rset.getInt("FILE_LEVEL"));
+				at.setFilePath(rset.getString("FILE_PATH"));
+				at.setOriginName(rset.getString("ORIGIN_NAME"));
+				at.setChangeName(rset.getString("CHANGE_NAME"));
+				list.add(at);				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 }

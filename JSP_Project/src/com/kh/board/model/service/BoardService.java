@@ -141,5 +141,26 @@ public class BoardService {
 		close(conn);
 		return result1*result2;
 	}
+	
+	public ArrayList<Board> selectThumbnailList() {
+		Connection conn =getConnection();
+		ArrayList<Board> list = new BoardDao().selectThumbnailList(conn);
+		close(conn);
+		return list;
+	}
+	
+	public Board selectThumbnailBoard(int bno) {
+		Connection conn =getConnection();
+		Board b = new BoardDao().selectThumbnailBoard(conn,bno);
+		close(conn);
+		return b;
+	}
+	
+	public ArrayList<Attachment> getThumbnailAttachments(int bno){
+		Connection conn =getConnection();
+		ArrayList<Attachment> list= new BoardDao().getThumbnailAttachments(conn, bno);
+		close(conn);
+		return list;
+	}
 
 }

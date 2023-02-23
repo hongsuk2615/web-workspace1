@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "java.util.ArrayList, com.kh.board.model.vo.Board" %>
+<%@ page import = "java.util.ArrayList, com.kh.board.model.vo.*" %>
 <%
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
 %>
@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 <style>
 	.outer{
-		height: 800px;
+	 min-height: 800px; 
 	}
 	.list-area{
 		width: 760px;
@@ -33,32 +33,19 @@
 			</div>
 		<% } %>
 		<div class="list-area">
-			
+			<% if(list.isEmpty()) {%>
+				작성사진이 없습니다.
+			<% } %>
+			<% for(Board b : list) { %>
 			<div class="thumbnail" align="center">
-				<input type="hidden" value="1">
-				<img src="<%=contextPath %>/resources/thumb_upfiles/animal2.gif" width="200px" height="150px">
+				<input type="hidden" value="<%= b.getBoardNo()%>">
+				<img src="<%=contextPath %><%= b.getTitleImg()%>" width="200px" height="150px">
 				<p>
-					No.1 첫번째 글 제목 <br>
-					조회수 : 1
+					<%= b.getBoardTitle() %> <br>
+					조회수 : <%= b.getCount() %>
 				</p>
 			</div>
-			<div class="thumbnail" align="center">
-				<input type="hidden" value="1">
-				<img src="<%=contextPath %>/resources/thumb_upfiles/animal1.gif" width="200px" height="150px">
-				<p>
-					No.2 두번째 글 제목 <br>
-					조회수 : 1
-				</p>
-			</div>
-			<div class="thumbnail" align="center">
-				<input type="hidden" value="1">
-				<img src="<%=contextPath %>/resources/thumb_upfiles/animal3.gif" width="200px" height="150px">
-				<p>
-					No.3 세번째 글 제목 <br>
-					조회수 : 3
-				</p>
-			</div>
-		
+			<% } %>		
 		
 		</div>
 	
@@ -67,7 +54,7 @@
 	<script>
 		$(function(){
 			$(".thumbnail").click(function(){
-				location.href="<%=contextPath%>/detail.th?bno"+$(this).children().eq(0).val();	
+				location.href="<%=contextPath%>/detail.th?bno="+$(this).children().eq(0).val();	
 			})			
 		})
 		

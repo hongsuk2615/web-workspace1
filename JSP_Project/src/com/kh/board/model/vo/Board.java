@@ -14,6 +14,7 @@ public class Board {
 	private String status;
 	
 	private String titleImg;
+	
 
 	public Board() {
 		super();
