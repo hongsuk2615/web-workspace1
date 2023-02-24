@@ -69,7 +69,7 @@ public class ThumbnailInsertController extends HttpServlet {
 				
 				if(multi.getOriginalFileName(key) != null) {// 넘어온 첨부파일이 있는 경우
 					//첨부파일이 있는 경우
-					// Attachement 객체 생성 + 원본명, 수정명, 저장경로 + 파일레벨 담기.
+					// Attachment 객체 생성 + 원본명, 수정명, 저장경로 + 파일레벨 담기.
 					// list에 추가
 					Attachment at = new Attachment();
 					at.setOriginName(multi.getOriginalFileName(key));

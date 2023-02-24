@@ -24,8 +24,7 @@
 		<h2 style="text-align: center;">사진게시판 작성하기</h2>
 		<br>
 
-		<form action="<%=contextPath%>/insert.th" id="enroll-form"
-			method="post" enctype="multipart/form-data">
+		<form action="<%=contextPath%>/insert.th" id="enroll-form" method="post" enctype="multipart/form-data">
 			<table align="center">
 				<tr>
 					<th width="100">제목</th>
@@ -54,12 +53,10 @@
 			</table>
 
 			<div id="file-area" style="dispaly: none;">
-				<input type="file" id="file1" name="file1"
-					onchange="loadImg(this, 1);" required> <input type="file"
-					id="file2" name="file2" onchange="loadImg(this, 2);"> <input
-					type="file" id="file3" name="file3" onchange="loadImg(this, 3);">
-				<input type="file" id="file4" name="file4"
-					onchange="loadImg(this, 4);">
+				<input type="file" id="file1" name="file1" onchange="loadImg(this, 1);" required> 
+				<input type="file" id="file2" name="file2" onchange="loadImg(this, 2);"> 
+				<input type="file" id="file3" name="file3" onchange="loadImg(this, 3);">
+				<input type="file" id="file4" name="file4" onchange="loadImg(this, 4);">
 			</div>
 			<script>
 				$(function() {
