@@ -94,4 +94,12 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	public boolean isId(String userId) {
+		Connection conn = JDBCTemplate.getConnection();
+		boolean result = false;
+		result = new MemberDao().isId(conn, userId);
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
 }

@@ -87,7 +87,7 @@
 						<tr>
 							<th>댓글작성</th>
 							<td>
-								<textarea id="replayContent" cols="50" rows="3" style="resize:none;"></textarea>
+								<textarea id="replyContent" cols="50" rows="3" style="resize:none;"></textarea>
 							</td>
 							<td><button onclick="insertReply();">댓글등록</button></td>
 						</tr>
@@ -95,7 +95,7 @@
 						<tr>
 							<th>댓글작성</th>
 							<td>
-								<textarea id="replayContent" cols="50" rows="3" style="resize:none;" readonly>로그인후 이용가능한 서비스입니다.</textarea>
+								<textarea id="replyContent" cols="50" rows="3" style="resize:none;" readonly>로그인후 이용가능한 서비스입니다.</textarea>
 							</td>
 							<td><button disabled>댓글등록</button></td>
 						</tr>
@@ -121,6 +121,60 @@
 			</table>
 		</div>
 	</div>
-
+	<script>
+		function insertReply(){
+			$.ajax({
+				url : "<%=contextPath%>/rinsert.bo",
+				data : {
+					content : $("#replyContent").val(),
+					bno     : "<%=b.getBoardNo()%>"
+				},
+				success : function(result){
+					// 댓글등록 성공시 result = 1
+					// 댓글등록 실패시 result = 0
+					if(result > 0 ){
+						// 새 댓글목록 불러오는 함수호출
+						selectReplyList();
+						// 댓글내용 비워두기
+						$("#replyContent").val("");
+					}else{
+						alert("댓글작성에 실패했습니다.");
+					}
+				},
+				error : function(){
+					console.log("댓글작성 실패");
+				}
+				
+			});
+			
+			
+		}
+	
+			function selectReplyList(){
+				$.ajax({
+					url : "<%=contextPath%>/rlist.bo",
+					data : {bno : "<%=b.getBoardNo()%>"},
+					success : function(list){
+						// 서버로부터 전달받은 리스트를 반복문을 통해 댓글목록으로 변환
+						console.log(list);
+						let result = "";
+						for(let reply of list){
+							result += "<tr>"
+										+ "<td>" + reply.replyWriter + "</td>"
+										+ "<td>" + reply.replyContent + "</td>"
+										+ "<td>" + reply.createDate + "</td>"
+									+"</tr>";
+						}
+						$("#reply-area tbody").html(result);
+					},
+					error : function(){
+						console.log("게시글 목록조회 실패")
+					}
+				});
+			}
+	
+		selectReplyList();
+	
+	</script>
 </body>
 </html>

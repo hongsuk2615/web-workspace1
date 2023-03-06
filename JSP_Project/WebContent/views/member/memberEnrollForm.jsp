@@ -27,7 +27,7 @@
 	                <!-- (tr>td*3)*8 -->
 	                <tr>
 	                    <td>* 아이디</td>
-	                    <td><input type="text" name="userId" maxlength="12" required></td>
+	                    <td><input type="text" id="userId" name="userId" maxlength="12" required></td>
 	                    <td><button type="button" onclick="idCheck();">중복확인</button></td>
 	                </tr>
 	                <tr>
@@ -91,12 +91,49 @@
 	            <br><br>
 	            
 	            <div align="center">
-	            	<button type="submit">회원가입</button>
+	            	<button id= "idEnrollment" type="submit" disabled>회원가입</button>
 	            	<button type="reset">초기화</button>
 	            </div>
 	            
 	            <br><br>
 		</form>
 	</div>
+	<script>
+	 function idCheck(){
+		 // 아이디를 입력하는 input요소 얻어오기
+		 let inputId = document.getElementById("userId").value;
+		 console.log(inputId);
+		 // 비동기 요청 보내기
+		  $.ajax({
+			 url : "<%=contextPath%>/idCheck.me",
+			 data : {userId : inputId},
+			 success : function(result){
+				 console.log(result);
+				 if(result.isId){
+				 	alert("이미 존재하거나 회원 탈퇴한 아이디입니다.");
+				 	document.getElementById("userId").focus();
+				 }else{
+					 // 사용 가능한 경우
+					 if(confirm("사용가능한 아이디 입니다. 사용하시겠습니까?")){
+						 //아이디값 수정할수 없게 막기
+						 document.getElementById("userId").readOnly = true;
+						 //회원가입 버튼 활성화
+						 document.getElementById("idEnrollment").disabled = false;
+					 }else{
+						 document.getElementById("userId").value = "";
+						 document.getElementById("userId").focus();
+					 }
+				 }
+			 },
+			 error : function(){
+				 console.log("아이디 중복체크 실패");
+			 } 
+			 
+			 
+			 
+		 });
+	 }
+	
+	</script>
 </body>
 </html>

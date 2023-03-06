@@ -184,5 +184,26 @@ public class MemberDao {
 		}
 		return result;
 	}
+	public boolean isId(Connection conn,String userId) {
+		boolean result = false;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("isId");
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			result = rset.next();
+			System.out.println(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
 
 }

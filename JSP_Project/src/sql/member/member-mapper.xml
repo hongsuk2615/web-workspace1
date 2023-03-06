@@ -54,5 +54,12 @@
 		     , MODIFY_DATE = SYSDATE
 		 WHERE USER_ID = ? AND USER_PWD = ?
 	</entry>
+	
+	<entry key = "isId">
+		SELECT *
+		  FROM MEMBER
+		 WHERE USER_ID = ?
+	</entry>
+	
 
 </properties>

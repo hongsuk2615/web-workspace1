@@ -361,7 +361,7 @@
 				$.ajax({
 					url : "<%= contextPath %>/jqHtmlTest.do",
 					type : "post",
-/* 					dataType : "html", */
+/*  					dataType : "html",  */
 					success : function(data){
 						console.log(data);
 						$('#htmloutput').html(data);
@@ -369,11 +369,6 @@
 				});	
 			});	
 		});
-		
-		
-	
-	
-	
 	</script>
 	
 	<h2>7. xml데이터 가져오기</h2>
