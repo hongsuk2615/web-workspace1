@@ -1,29 +1,25 @@
-package com.kh.board.controller;
+package com.kh.cookie.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Reply;
-
 /**
- * Servlet implementation class AjaxReplyListController
+ * Servlet implementation class CheckCookieController
  */
-@WebServlet("/rlist.bo")
-public class AjaxReplyListController extends HttpServlet {
+@WebServlet("/checkCookie.do")
+public class CheckCookieController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxReplyListController() {
+    public CheckCookieController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +28,16 @@ public class AjaxReplyListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int bno = Integer.parseInt(request.getParameter("bno"));
-		ArrayList<Reply> list = new BoardService().replyList(bno);
-		Gson gson = new Gson();
-		response.setContentType("application/json, charset = UTF-8");
-		gson.toJson(list, response.getWriter());
-		
+		//client가 보낸 cookie값을 확인
+		// getCookies 메서드 이용
+		Cookie[] cookies = request.getCookies(); // 저장된 쿠키가없으면 null값이 반환됨
+		if(cookies != null) {			
+			for(Cookie cookie : cookies) {
+				request.setAttribute(cookie.getName(), cookie.getValue());
+				System.out.println(cookie.getName() + " : " + cookie.getValue());
+			}
+		}
+		request.getRequestDispatcher("views/responsePage.jsp").forward(request, response);
 	}
 
 	/**

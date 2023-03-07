@@ -122,6 +122,9 @@
 		</div>
 	</div>
 	<script>
+		$(function(){
+			setInterval(selectReplyList,1000);
+		});
 		function insertReply(){
 			$.ajax({
 				url : "<%=contextPath%>/rinsert.bo",

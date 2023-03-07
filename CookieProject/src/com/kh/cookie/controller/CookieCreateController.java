@@ -1,29 +1,25 @@
-package com.kh.board.controller;
+package com.kh.cookie.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Reply;
-
 /**
- * Servlet implementation class AjaxReplyListController
+ * Servlet implementation class CookieCreateController
  */
-@WebServlet("/rlist.bo")
-public class AjaxReplyListController extends HttpServlet {
+@WebServlet("/cookieTest.do")
+public class CookieCreateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxReplyListController() {
+    public CookieCreateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +28,19 @@ public class AjaxReplyListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int bno = Integer.parseInt(request.getParameter("bno"));
-		ArrayList<Reply> list = new BoardService().replyList(bno);
-		Gson gson = new Gson();
-		response.setContentType("application/json, charset = UTF-8");
-		gson.toJson(list, response.getWriter());
+		//쿠키 생성하기
+		Cookie c = new Cookie("userId","admin");
+		//쿠키 객체 생성시 저장할 key,value값을 생성자의 매개변수로 넣음
+		c.setMaxAge(24*60*60);//1일 동안 유지되도록 설정
+		//생성된 쿠키를 클라이언트에 전달
+		response.addCookie(c);
 		
+		Cookie c2 = new Cookie("email","hong@gmail.com");
+		c2.setMaxAge(60);//60초 유지
+		
+		response.addCookie(c2);
+		
+		request.getRequestDispatcher("views/responsePage.jsp").forward(request, response);
 	}
 
 	/**

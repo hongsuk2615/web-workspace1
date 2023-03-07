@@ -1,29 +1,25 @@
-package com.kh.board.controller;
+package com.kh.cookie.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Reply;
-
 /**
- * Servlet implementation class AjaxReplyListController
+ * Servlet implementation class DeleteCookieController
  */
-@WebServlet("/rlist.bo")
-public class AjaxReplyListController extends HttpServlet {
+@WebServlet("/deleteCookie.do")
+public class DeleteCookieController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxReplyListController() {
+    public DeleteCookieController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +28,15 @@ public class AjaxReplyListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int bno = Integer.parseInt(request.getParameter("bno"));
-		ArrayList<Reply> list = new BoardService().replyList(bno);
-		Gson gson = new Gson();
-		response.setContentType("application/json, charset = UTF-8");
-		gson.toJson(list, response.getWriter());
+		// 저장된 쿠키 삭제
+		String cookieId = request.getParameter("cookieId");
+		// 1. 쿠키의 키값을 이용하여 유효기간을 조정하여 삭제하기
+		Cookie c = new Cookie(cookieId,"");
+		c.setMaxAge(0); // 동일한 이름의 키값을 가진 쿠키객체를 생성하여 유효시간을 0초로 만들어서 전달하게 되면, 클라이언트의 쿠키가 삭제됨
 		
+		response.addCookie(c);
+		
+		response.sendRedirect(request.getContextPath());
 	}
 
 	/**
