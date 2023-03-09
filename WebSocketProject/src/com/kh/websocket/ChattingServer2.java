@@ -43,7 +43,7 @@ public class ChattingServer2 {
 				if(m.getReceiver() != null && !m.getReceiver().equals("")) {
 					if(m.getSender().equals(msg.getReceiver()) || m.getSender().equals(msg.getSender())) {
 						try {
-							client.getBasicRemote().sendObject(msg);
+							client.getBasicRemote().sendObject(msg); // encoder 필요함
 						} catch (IOException e) {
 							e.printStackTrace();
 						} catch (EncodeException e) {
