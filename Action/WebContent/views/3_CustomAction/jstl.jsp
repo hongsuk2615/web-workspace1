@@ -37,6 +37,20 @@
 	</p>
 	
 	<a href="01_core.jsp">01_core.jsp</a>
+	<p> 
+		숫자,날짜 및 시간데이터 출력형식을 지정할때 사용
+	</p>
+	
+	<a href="02_formatting.jsp">formatting lib</a>
+	
+	<h3> 3. JSTL Functions Library</h3>
+	<p>
+		EL 구문 안에서 사용할수 있는 메서드를 제공
+	</p>
+	<a href="03_function.jsp">03_function.jsp</a>
+	
+	<h3> 4. 그외 태그들</h3>
+	<a href="04_other.jsp">other</a>
 	
 	
 </body>
