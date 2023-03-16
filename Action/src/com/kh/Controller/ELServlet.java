@@ -62,7 +62,7 @@ public class ELServlet extends HttpServlet {
 		Person teacher = new Person("경민","남","선생");
 		request.setAttribute("classRoom", "C강의장");
 		request.setAttribute("person", new Person("홍석","남","학생"));
-		request.getRequestDispatcher("views/1_EL/01_el.jsp").forward(request, response);
+		
 		// sessionScope에 데이터 담기
 		HttpSession session = request.getSession();
 		session.setAttribute("academy", "KH정보교육원");
@@ -75,6 +75,7 @@ public class ELServlet extends HttpServlet {
 		//application scope에 데이터 담기
 		ServletContext application = request.getServletContext();
 		application.setAttribute("scope", "application scope");
+		request.getRequestDispatcher("views/1_EL/01_el.jsp").forward(request, response);
 	}
 
 	/**

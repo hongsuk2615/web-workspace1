@@ -55,7 +55,7 @@
 	삭제전 : result(세션영역) : ${result } <br><br>
 	1) 특정 scope 지정해서 삭제하기 <br>
 	<c:remove var = "result" scope="request"/>
-	request에있는 result변수 삭제 후 result : ${result }<br>
+	request에있는 result변수 삭제 후 result : ${result}<br>
 	2) 모든 scope에서 삭제시키기 <br>
 	<c:remove var="result"/>
 	삭제후 result값 : ${result } <br><br>
